@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "editor": "wokwi",
+  "author": "FMFigueroa <felixmanuelfigueroa@gmail.com>",
+  "parts": [
+    {
+      "type": "board-esp32-s3-devkitc-1",
+      "id": "esp",
+      "top": -2.52,
+      "left": -119.45,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ili9341",
+      "id": "lcd1",
+      "top": -21.08,
+      "left": 34.69,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    ["esp:TX", "$serialMonitor:RX", "", []],
+    ["esp:RX", "$serialMonitor:TX", "", []],
+    ["esp:36", "lcd1:SCK", "blue", ["h24.51", "v188.35", "h144.11"]],
+    ["esp:35", "lcd1:MOSI", "purple", ["h14.21", "v169.36", "h144.81"]],
+    ["lcd1:GND", "esp:GND.1", "black", ["v25.35", "h-219.48", "v-63.41"]],
+    ["esp:5V", "lcd1:VCC", "red", ["h-20.34", "v65.97", "h217.7"]],
+    ["lcd1:D/C", "esp:4", "green", ["v34.73", "h-264.7", "v-245.59"]],
+    ["lcd1:CS", "lcd1:GND", "black", ["v24.56", "h-9.6"]]
+  ],
+  "serialMonitor": {
+    "display": "terminal"
+  }
+}

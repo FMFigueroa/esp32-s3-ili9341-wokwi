@@ -8,9 +8,12 @@ use esp_backtrace as _;
 use display_interface_spi::SPIInterfaceNoCS;
 use embedded_graphics::{
     image::Image,
+    mono_font::{ascii::FONT_10X20, MonoTextStyle},
     pixelcolor::Rgb888,
+    primitives::Rectangle,
     Drawable,
     prelude::*,
+    text::Text,
 };
 use tinytga::Tga;
 
@@ -104,12 +107,19 @@ fn main() -> ! {
         .init(&mut delay, core::prelude::v1::Some(reset))
         .unwrap();
 
-    // Load the TGA image
-    let tga = Tga::from_slice(include_bytes!("../assets/tiles.tga")).unwrap();
-    let image = Image::new(&tga, Point::new(85, 85));
+    // Load TGA file with the tiles.
+    let image = Tga::from_slice(include_bytes!("../assets/logo.tga")).unwrap();
 
-    // Display the image
-    image.draw(&mut display).unwrap();
+    // Create sub images for the individual tiles.
+    // Note that the tiles don't have to be the same size.
+    let image_final = image.sub_image(&Rectangle::new(Point::new(0, 0), Size::new(128, 128)));
+
+    // Draw sub_image.
+    Image::new(&image_final, Point::new(85, 80)).draw(&mut display).unwrap();
+    
+    // Draw labels.
+    let text_style = MonoTextStyle::new(&FONT_10X20, Rgb888::WHITE);
+    Text::new("Rust Latam Group", Point::new(35, 70), text_style).draw(&mut display).unwrap();
 
     loop {}
 }

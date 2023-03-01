@@ -1,5 +1,5 @@
 [package]
-name = "esp32_s3_with_ili9341"
+name = "esp32_s3_ili9341_wokwi"
 version = "0.1.0"
 authors = ["FMFigueroa <felixmanuelfigueroa@gmail.com>"]
 edition = "2021"

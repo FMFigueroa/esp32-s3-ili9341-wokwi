@@ -203,7 +203,7 @@ version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e57b6eded586c6539146fd2511d13ca120e4d5e4d7eb56b69da6ae8e76b748ff"
 dependencies = [
- "esp-println",
+ "esp-println 0.3.1",
 ]
 
 [[package]]
@@ -251,6 +251,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "adcfe5d532cf2029b11996cab6b4af948f41c24b131c76422115634711549aaa"
 
 [[package]]
+name = "esp-println"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c33a9d1eb60882ec910021bda7b67ce789dd0d6325b886e6739ef9d8f495ae22"
+dependencies = [
+ "critical-section",
+]
+
+[[package]]
 name = "esp-synopsys-usb-otg"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -263,14 +272,14 @@ dependencies = [
 ]
 
 [[package]]
-name = "esp32_s3_with_ili9341"
+name = "esp32_s3_ili9341_wokwi"
 version = "0.1.0"
 dependencies = [
  "display-interface-spi",
  "embedded-graphics",
  "esp-alloc",
  "esp-backtrace",
- "esp-println",
+ "esp-println 0.4.0",
  "esp32s3-hal",
  "mipidsi",
 ]

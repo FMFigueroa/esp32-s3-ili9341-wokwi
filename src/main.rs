@@ -1,12 +1,10 @@
 #![no_std]
 #![no_main]
 
-/*This library provides smart pointers and collections
-   to manage Values allocated to the heap.
-*/
+//This library provides smart pointers and collections to manage Values allocated to the heap.
 extern crate alloc; 
+use esp_backtrace as _;
 
-//Crates para la comunicacion con el Display!
 use display_interface_spi::SPIInterfaceNoCS;
 use embedded_graphics::{
     prelude::RgbColor,
@@ -18,14 +16,20 @@ use embedded_graphics::{
     text::{Alignment, Text},
     Drawable,
 };
-use hal::{clock::{ClockControl, CpuClock}, peripherals::Peripherals, prelude::*,spi, timer::TimerGroup, Rtc, IO, Delay};
-
+use hal::{
+    clock::{ClockControl, CpuClock},
+    peripherals::Peripherals,
+    prelude::*,
+    spi::{Spi,SpiMode},
+    timer::TimerGroup,
+    Rtc,
+    IO,
+    Delay
+};
+use mipidsi::{ Orientation, ColorOrder};
 use esp_println::println;
 
-use mipidsi::{ Orientation, ColorOrder};
 
-#[allow(unused_imports)]
-use esp_backtrace as _;
 
 #[global_allocator]
 static ALLOCATOR: esp_alloc::EspHeap = esp_alloc::EspHeap::empty();
@@ -70,42 +74,40 @@ fn main() -> ! {
 
     //============= Display LCD TFT-ILI9341 240x320 with SPI Interface ============\\ 
 
-    let mut delay = Delay::new(&clocks);
     let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
-
     let sclk = io.pins.gpio36; // SPI Clock to LCD
     let mosi = io.pins.gpio35;  // SPI MOSI to LCD
-    let mut delay = Delay::new(&clocks);// delay
-
-    //===**⚠ the RST and backlight (LED) pins are not available in the simulation with Wokwi. **===\\
-    let reset = io.pins.gpio48.into_push_pull_output();
-
-    let mut backlight = io.pins.gpio45.into_push_pull_output(); 
-     backlight.set_high().unwrap();
-
+ 
     // configure SPI
-    let spi = spi::Spi::new_no_cs_no_miso(
+    let spi = Spi::new_no_cs_no_miso(
         peripherals.SPI2,
         sclk,
         mosi,
         60u32.MHz(),
-        spi::SpiMode::Mode0,
+        SpiMode::Mode0,
         &mut system.peripheral_clock_control,
         &clocks,
     );
+
+    //===**⚠ the RST and backlight (LED) pins are not available in the simulation with Wokwi. **===\\
+    let reset = io.pins.gpio48.into_push_pull_output();
+    let mut backlight = io.pins.gpio45.into_push_pull_output(); 
+    backlight.set_high().unwrap();
+
     // display interface abstraction from SPI and DC
     let dc = io.pins.gpio4.into_push_pull_output();
     let di = SPIInterfaceNoCS::new(spi, dc);
 
+    let mut delay = Delay::new(&clocks);// delay
     // create driver
-     let mut display = mipidsi::Builder::ili9341_rgb565(di)
+    let mut display = mipidsi::Builder::ili9341_rgb565(di)
         .with_orientation(Orientation::Portrait(true)) 
         .with_color_order(ColorOrder::Rgb)
         .init(&mut delay, core::prelude::v1::Some(reset))
-    .unwrap();
+        .unwrap();
 
 
-     Text::with_alignment("Hello World Rust!", Point::new(120, 180), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::WHITE).build(),  Alignment::Center)
+    Text::with_alignment("Hello World Rust!", Point::new(120, 180), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::WHITE).build(),  Alignment::Center)
         .draw(&mut display)
         .unwrap();
     

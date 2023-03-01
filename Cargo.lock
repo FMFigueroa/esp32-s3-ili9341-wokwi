@@ -282,6 +282,7 @@ dependencies = [
  "esp-println 0.4.0",
  "esp32s3-hal",
  "mipidsi",
+ "tinytga",
 ]
 
 [[package]]
@@ -426,8 +427,6 @@ dependencies = [
 [[package]]
 name = "mipidsi"
 version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "187aa4e418283ff1186bc471cb3a20bab339ee8f25882bdb7465ae44bd971c95"
 dependencies = [
  "display-interface",
  "embedded-graphics-core",
@@ -456,6 +455,16 @@ name = "nb"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "546c37ac5d9e56f55e73b677106873d9d9f5190605e41a856503623648488cae"
+
+[[package]]
+name = "nom"
+version = "6.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e7413f999671bd4745a7b624bd370a569fb6bc574b23c83a3c5ed2e453f3d5e2"
+dependencies = [
+ "memchr",
+ "version_check",
+]
 
 [[package]]
 name = "num-traits"
@@ -638,6 +647,16 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
+]
+
+[[package]]
+name = "tinytga"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "756dcc0078b35e5f8ab052f19a48225821fd046011342d31deef6b8d5c825d2b"
+dependencies = [
+ "embedded-graphics",
+ "nom",
 ]
 
 [[package]]

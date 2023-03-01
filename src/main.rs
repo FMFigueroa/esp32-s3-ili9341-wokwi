@@ -7,15 +7,13 @@ use esp_backtrace as _;
 
 use display_interface_spi::SPIInterfaceNoCS;
 use embedded_graphics::{
-    prelude::RgbColor,
-    mono_font::{
-        ascii::FONT_10X20,
-        MonoTextStyleBuilder,
-    },
-    prelude::Point,
-    text::{Alignment, Text},
+    image::Image,
+    pixelcolor::Rgb888,
     Drawable,
+    prelude::*,
 };
+use tinytga::Tga;
+
 use hal::{
     clock::{ClockControl, CpuClock},
     peripherals::Peripherals,
@@ -100,16 +98,18 @@ fn main() -> ! {
 
     let mut delay = Delay::new(&clocks);// delay
     // create driver
-    let mut display = mipidsi::Builder::ili9341_rgb565(di)
+    let mut display = mipidsi::Builder::ili9341_rgb888(di)
         .with_orientation(Orientation::Portrait(true)) 
         .with_color_order(ColorOrder::Rgb)
         .init(&mut delay, core::prelude::v1::Some(reset))
         .unwrap();
 
+    // Load the TGA image
+    let tga = Tga::from_slice(include_bytes!("../assets/tiles.tga")).unwrap();
+    let image = Image::new(&tga, Point::new(85, 85));
 
-    Text::with_alignment("Hello World Rust!", Point::new(120, 180), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::WHITE).build(),  Alignment::Center)
-        .draw(&mut display)
-        .unwrap();
-    
+    // Display the image
+    image.draw(&mut display).unwrap();
+
     loop {}
 }

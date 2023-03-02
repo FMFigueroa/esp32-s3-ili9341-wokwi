@@ -9,13 +9,13 @@ use display_interface_spi::SPIInterfaceNoCS;
 use embedded_graphics::{
     image::Image,
     mono_font::{ascii::FONT_10X20, MonoTextStyle},
-    pixelcolor::Rgb888,
+    pixelcolor::Rgb565,
     primitives::Rectangle,
     Drawable,
     prelude::*,
     text::Text,
 };
-use tinytga::Tga;
+use tinybmp::Bmp;
 
 use hal::{
     clock::{ClockControl, CpuClock},
@@ -101,14 +101,14 @@ fn main() -> ! {
 
     let mut delay = Delay::new(&clocks);// delay
     // create driver
-    let mut display = mipidsi::Builder::ili9341_rgb888(di)
+    let mut display = mipidsi::Builder::ili9341_rgb565(di)
         .with_orientation(Orientation::Portrait(true)) 
         .with_color_order(ColorOrder::Rgb)
         .init(&mut delay, core::prelude::v1::Some(reset))
         .unwrap();
 
     // Load TGA file with the tiles.
-    let image = Tga::from_slice(include_bytes!("../assets/logo.tga")).unwrap();
+    let image = Bmp::from_slice(include_bytes!("../assets/rust-pride.bmp")).unwrap();
 
     // Create sub images for the individual tiles.
     // Note that the tiles don't have to be the same size.
@@ -118,8 +118,9 @@ fn main() -> ! {
     Image::new(&image_final, Point::new(85, 80)).draw(&mut display).unwrap();
     
     // Draw labels.
-    let text_style = MonoTextStyle::new(&FONT_10X20, Rgb888::WHITE);
+    let text_style = MonoTextStyle::new(&FONT_10X20, Rgb565::WHITE);
     Text::new("Rust Latam Group", Point::new(35, 70), text_style).draw(&mut display).unwrap();
 
     loop {}
+
 }

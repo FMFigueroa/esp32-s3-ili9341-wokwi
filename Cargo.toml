@@ -15,3 +15,4 @@ display-interface-spi = "0.4.1"
 embedded-graphics = "0.7.1" #https://docs.rs/embedded-graphics/latest/embedded_graphics/index.html
 mipidsi = {path = "./mipidsi"} #https://github.com/almindor/mipidsi
 tinytga = "0.4.1"
+tinybmp = "0.4.0"

@@ -1,4 +1,4 @@
-# esp32_s3_with_ili9341
+# ESP32-S3 + Display TFT ili9341 + Wokwi Simulator
 
 ## Dev Containers
 

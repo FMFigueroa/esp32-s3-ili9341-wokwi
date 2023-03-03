@@ -1,56 +1,32 @@
 #![no_std]
 #![no_main]
 
-/*This library provides smart pointers and collections
-   to manage Values allocated to the heap.
-*/
-extern crate alloc; 
+use esp_backtrace as _;
+use esp_println::println;
 
-//Crates para la comunicacion con el Display!
+use hal::{
+    clock::{ClockControl, CpuClock},
+    peripherals::Peripherals,
+    prelude::*,
+    spi::{Spi, SpiMode},
+    timer::TimerGroup,
+    Delay, Rtc, IO,
+};
+
 use display_interface_spi::SPIInterfaceNoCS;
 use embedded_graphics::{
-    prelude::RgbColor,
     mono_font::{
         ascii::FONT_10X20,
         MonoTextStyleBuilder,
     },
-    prelude::Point,
+    prelude::*,
     text::{Alignment, Text},
     Drawable,
 };
-use hal::{clock::{ClockControl, CpuClock}, peripherals::Peripherals, prelude::*,spi, timer::TimerGroup, Rtc, IO, Delay};
-
-use esp_println::println;
-
-use mipidsi::{ Orientation, ColorOrder};
-
-#[allow(unused_imports)]
-use esp_backtrace as _;
-
-#[global_allocator]
-static ALLOCATOR: esp_alloc::EspHeap = esp_alloc::EspHeap::empty();
-fn init_heap() {
-    const HEAP_SIZE: usize = 250 * 1024;
-
-    extern "C" {
-        static mut _heap_start: u32;
-        static mut _heap_end: u32;
-    }
-
-    unsafe {
-        let heap_start = &_heap_start as *const _ as usize;
-        let heap_end = &_heap_end as *const _ as usize;
-        assert!(
-            heap_end - heap_start > HEAP_SIZE,
-            "Not enough available heap memory."
-        );
-        ALLOCATOR.init(heap_start as *mut u8, HEAP_SIZE);
-    }
-}
+use mipidsi::{Builder, ColorOrder, Orientation};
 
 #[entry]
 fn main() -> ! {
-    init_heap();
     let peripherals = Peripherals::take();
     let mut system = peripherals.SYSTEM.split();
     let clocks = ClockControl::configure(system.clock_control, CpuClock::Clock240MHz).freeze();
@@ -70,42 +46,42 @@ fn main() -> ! {
 
     //============= Display LCD TFT-ILI9341 240x320 with SPI Interface ============\\ 
 
-    let mut delay = Delay::new(&clocks);
     let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
-
     let sclk = io.pins.gpio36; // SPI Clock to LCD
     let mosi = io.pins.gpio35;  // SPI MOSI to LCD
-    let mut delay = Delay::new(&clocks);// delay
-
-    //===**⚠ the RST and backlight (LED) pins are not available in the simulation with Wokwi. **===\\
-    let reset = io.pins.gpio48.into_push_pull_output();
-
-    let mut backlight = io.pins.gpio45.into_push_pull_output(); 
-     backlight.set_high().unwrap();
-
+ 
     // configure SPI
-    let spi = spi::Spi::new_no_cs_no_miso(
+    let spi = Spi::new_no_cs_no_miso(
         peripherals.SPI2,
         sclk,
         mosi,
         60u32.MHz(),
-        spi::SpiMode::Mode0,
+        SpiMode::Mode0,
         &mut system.peripheral_clock_control,
         &clocks,
     );
-    // display interface abstraction from SPI and DC
+
+    //===Note: Backlight(LED) and RST pins are not available in the simulation with Wokwi. **===\\
+    let mut backlight = io.pins.gpio45.into_push_pull_output();
+    backlight.set_high().unwrap();
+    let rst = io.pins.gpio48.into_push_pull_output();
+    let mut delay = Delay::new(&clocks);
+
+    // Create Display Interface abstraction from SPI and DC pin
     let dc = io.pins.gpio4.into_push_pull_output();
     let di = SPIInterfaceNoCS::new(spi, dc);
 
-    // create driver
-     let mut display = mipidsi::Builder::ili9341_rgb565(di)
-        .with_orientation(Orientation::Portrait(true)) 
+    // Create the ILI9341 display driver in rgb565 color mode from the display interface
+    // and use a HW reset pin during init, delay provider from your MCU
+    let mut display = Builder::ili9341_rgb565(di)
+        .with_orientation(Orientation::Portrait(true))
         .with_color_order(ColorOrder::Rgb)
-        .init(&mut delay, core::prelude::v1::Some(reset))
-    .unwrap();
+        .init(&mut delay, core::prelude::v1::Some(rst))
+        .unwrap();
+    //display.clear(Rgb565::BLACK).unwrap();
 
 
-     Text::with_alignment("Hello World Rust!", Point::new(120, 180), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::WHITE).build(),  Alignment::Center)
+    Text::with_alignment("Hello World Rust!", Point::new(120, 180), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::WHITE).build(),  Alignment::Center)
         .draw(&mut display)
         .unwrap();
     

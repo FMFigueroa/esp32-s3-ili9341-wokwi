@@ -1,5 +1,5 @@
 [package]
-name = "esp32_s3_with_ili9341"
+name = "esp32_s3_ili9341_wokwi"
 version = "0.1.0"
 authors = ["FMFigueroa <felixmanuelfigueroa@gmail.com>"]
 edition = "2021"
@@ -8,7 +8,7 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 hal = { package = "esp32s3-hal", version = "0.7.0" }
 esp-backtrace = { version = "0.5.0", features = ["esp32s3", "panic-handler", "print-uart"] }
-esp-println       = { version = "0.3.1", features = ["esp32s3"] }
+esp-println       = { version = "0.4.0", features = ["esp32s3"] }
 esp-alloc = { version = "0.2.0", features = ["oom-handler"] }
 #===================         Display TFT ILI9341  SPI          =====================#
 display-interface-spi = "0.4.1"

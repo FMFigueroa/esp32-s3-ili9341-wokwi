@@ -300,6 +300,7 @@ dependencies = [
  "esp-println 0.4.0",
  "esp32s3-hal",
  "mipidsi",
+ "tinybmp",
 ]
 
 [[package]]
@@ -665,6 +666,15 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
+]
+
+[[package]]
+name = "tinybmp"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0e959c507975d768a226a08227d56791f6e60bddcf714ad7ef67ae2d20bae743"
+dependencies = [
+ "embedded-graphics",
 ]
 
 [[package]]

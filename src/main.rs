@@ -14,6 +14,7 @@ use hal::{
 };
 
 use display_interface_spi::SPIInterfaceNoCS;
+
 use embedded_graphics::{
     prelude::*,
     mono_font::{
@@ -24,9 +25,12 @@ use embedded_graphics::{
     text::{Alignment, Text},
     primitives::{Line, PrimitiveStyle, PrimitiveStyleBuilder, Rectangle},
     Drawable,
+    image::Image,
 };
-use embedded_plots::axis::{Axis, Scale, Placement};
+
 use mipidsi::{Builder, ColorOrder, Orientation};
+use embedded_plots::axis::{Axis, Scale, Placement};
+use tinybmp::Bmp;
 
 #[entry]
 fn main() -> ! {
@@ -83,7 +87,22 @@ fn main() -> ! {
         .unwrap();
     //display.clear(Rgb565::BLACK).unwrap();
 
+//================================================================================================\\
 
+    //Load the Icon BMP image.
+    // The color type must be specified explicitly to match the color format used by the image,
+    // otherwise the compiler may infer an incorrect type.
+    let bmp = Bmp::from_slice(include_bytes!("../assets/rust-pride.bmp")).unwrap();
+
+    // To draw the `bmp` object to the display it needs to be wrapped in an `Image` object to set
+    // the position at which it should drawn. Here, the top left corner of the image is set to
+    // `(32, 32)`.
+    let image = Image::new(&bmp, Point::new(5, 5));
+
+    // Display the image
+    image.draw(&mut display).unwrap();
+
+    // Graph Tittle 
      Text::with_alignment("Temperature Logger", Point::new(160, 75), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::CYAN).build(),  Alignment::Center)
         .draw(&mut display)
         .unwrap();

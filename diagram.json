@@ -6,27 +6,29 @@
     {
       "type": "board-esp32-s3-devkitc-1",
       "id": "esp",
-      "top": -2.52,
-      "left": -119.45,
+      "top": 136.38,
+      "left": -1.28,
+      "rotate": 270,
       "attrs": {}
     },
     {
       "type": "wokwi-ili9341",
       "id": "lcd1",
-      "top": -21.08,
-      "left": 34.69,
+      "top": -55.61,
+      "left": -38.21,
+      "rotate": 270,
       "attrs": {}
     }
   ],
   "connections": [
     ["esp:TX", "$serialMonitor:RX", "", []],
     ["esp:RX", "$serialMonitor:TX", "", []],
-    ["esp:36", "lcd1:SCK", "blue", ["h24.51", "v188.35", "h144.11"]],
-    ["esp:35", "lcd1:MOSI", "purple", ["h14.21", "v169.36", "h144.81"]],
-    ["lcd1:GND", "esp:GND.1", "black", ["v25.35", "h-219.48", "v-63.41"]],
-    ["esp:5V", "lcd1:VCC", "red", ["h-20.34", "v65.97", "h217.7"]],
-    ["lcd1:D/C", "esp:4", "green", ["v34.73", "h-264.7", "v-245.59"]],
-    ["lcd1:CS", "lcd1:GND", "black", ["v24.56", "h-9.6"]]
+    ["lcd1:SCK", "esp:36", "orange", ["h41.59", "v128.76", "h-180.28"]],
+    ["lcd1:MOSI", "esp:35", "blue", ["h35.45", "v124.53", "h-164.54"]],
+    ["esp:GND.1", "lcd1:GND", "black", ["v12.64", "h65.1", "v-200.45"]],
+    ["lcd1:CS", "lcd1:GND", "black", ["h21.64", "v9.6"]],
+    ["esp:4", "lcd1:D/C", "green", ["v24.15", "h244.8", "v-240.76"]],
+    ["lcd1:VCC", "esp:5V", "red", ["h16.27", "v196.99", "h-65.22"]]
   ],
   "serialMonitor": {
     "display": "terminal"

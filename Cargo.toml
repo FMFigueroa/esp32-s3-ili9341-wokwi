@@ -14,3 +14,4 @@ esp-alloc = { version = "0.2.0", features = ["oom-handler"] }
 display-interface-spi = "0.4.1"
 embedded-graphics = "0.7.1" #https://docs.rs/embedded-graphics/latest/embedded_graphics/index.html
 mipidsi = "0.6.0" #https://github.com/almindor/mipidsi
+embedded-plots = "0.2.0"

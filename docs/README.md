@@ -6,7 +6,8 @@
 
 <hr/>
 <p align="justify">
-Bienvenido a todos, Rust se ha convertido en una solución para diversos sectores del desarrollo de software y la tecnología, en especial para los sistemas embebidos, esta es una prueba del simulador Wokwi usando el ESP32-S3 con un display ILI9341 conectado por SPI, es una aplicacion bare metal no-std, para más detalle visita [Rust on ESP Community](https://github.com/esp-rs/). Espero que te sirva como guía de aprendizaje y pueda ayudarte al máximo para que te abra las puertas a nuevas oportunidades como desarrollador de Rust Embedded🦀.
+Bienvenido a todos, Rust se ha convertido en una solución para diversos sectores del desarrollo de software y la tecnología, en especial para los sistemas embebidos, esta es una prueba del simulador Wokwi usando el ESP32-S3 con un display ILI9341 conectado por SPI, es una aplicacion bare metal no-std, para más detalle visita [Rust on ESP Community](https://github.com/esp-rs)
+Espero que te sirva como guía de aprendizaje y pueda ayudarte al máximo para que te abra las puertas a nuevas oportunidades como desarrollador de Rust Embedded🦀.
 </p>
 
 <hr>
@@ -146,11 +147,6 @@ Wokwi offers debugging with GDB.
 
 <p align="center">
 <img  src="https://res.cloudinary.com/lenobit/image/upload/v1669142817/Rust%20Essential%20Training/assets/banner-github_k63n9t.png">
-</p>
-
-<hr/>
-<p align="justify">
-Bienvenido a todos, aquí aprenderás a programar en Rust desde cero en español, entre lecciones paso a paso, irás adquiriendo los fundamentos y habilidades necesarias para que puedas programar en este excepcional lenguaje, el código ejemplo te dará una mejor comprensión de los conocimentos adquiridos en cada lección, Rust se caracteriza por La velocidad, la concurrencia y la seguridad en la programación de sistemas. Sin embargo, Rust se ha convertido en una solución para diversos sectores del desarrollo de software y la tecnología, espero que esta guía de aprendizaje pueda ayudarte al máximo y te abra las puertas a nuevas oportunidades como desarrollador de Rust 🦀.
 </p>
 
 <hr>

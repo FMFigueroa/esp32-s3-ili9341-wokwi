@@ -18,12 +18,12 @@ use display_interface_spi::SPIInterfaceNoCS;
 use embedded_graphics::{
     prelude::*,
     mono_font::{
-        ascii::{FONT_10X20},
+        ascii::{FONT_6X10,FONT_10X20},
         MonoTextStyleBuilder,
     },
     pixelcolor::Rgb565,
     text::{Alignment, Text},
-    primitives::{Line, PrimitiveStyle, PrimitiveStyleBuilder, Rectangle},
+    primitives::{Line, PrimitiveStyle, PrimitiveStyleBuilder, Rectangle, RoundedRectangle},
     Drawable,
     image::Image,
 };
@@ -102,8 +102,26 @@ fn main() -> ! {
     // Display the image
     image.draw(&mut display).unwrap();
 
-    // Graph Tittle 
-     Text::with_alignment("Temperature Logger", Point::new(160, 75), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::CYAN).build(),  Alignment::Center)
+    
+
+    //==== Time | Temperature | Date ==========
+    let style = PrimitiveStyleBuilder::new()
+    .stroke_color(Rgb565::RED)
+    .stroke_width(3)
+    .fill_color(Rgb565::GREEN)
+    .build();
+
+    RoundedRectangle::with_equal_corners(
+        Rectangle::new(Point::new(90, 10), Size::new(150, 50)),
+        Size::new(10, 10),
+    )
+    .into_styled(style)
+    .draw(&mut display).unwrap();
+
+    Text::with_alignment("15:35 | 21C", Point::new(165, 30), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::BLACK).build(),  Alignment::Center)
+        .draw(&mut display)
+        .unwrap();
+    Text::with_alignment("Friday 03/03/23", Point::new(180, 50), MonoTextStyleBuilder::new().font(&FONT_6X10).text_color(RgbColor::BLACK).build(),  Alignment::Center)
         .draw(&mut display)
         .unwrap();
 
@@ -120,11 +138,15 @@ fn main() -> ! {
             .draw(&mut display)
             .unwrap();
     }
-    Line::new(Point::new(305, 12), Point::new(305, 16))
+     Line::new(Point::new(305, 12), Point::new(305, 16))
         .into_styled(PrimitiveStyle::with_stroke(Rgb565::WHITE, 3))
         .draw(&mut display)
         .unwrap();
-
+    //==============2D Plots Grid ==========================================
+    // Graph Tittle 
+     Text::with_alignment("Temperature Logger", Point::new(160, 80), MonoTextStyleBuilder::new().font(&FONT_10X20).text_color(RgbColor::CYAN).build(),  Alignment::Center)
+        .draw(&mut display)
+        .unwrap();
     //========  Plot Axis ==========
         let default_style = MonoTextStyleBuilder::new()
         .font(&FONT_10X20)
@@ -158,6 +180,7 @@ fn main() -> ! {
         .draw(&mut display)
         .unwrap();
     }
+    //==================================================================
         
     loop {}
 }

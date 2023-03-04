@@ -5,10 +5,9 @@
 </p>
 
 <hr/>
-<p align="justify">
-Bienvenido a todos, Rust se ha convertido en una solución para diversos sectores del desarrollo de software y la tecnología, en especial para los sistemas embebidos, esta es una prueba del simulador Wokwi usando el ESP32-S3 con un display ILI9341 conectado por SPI, es una aplicacion bare metal no-std, para más detalle visita [Rust on ESP Community](https://github.com/esp-rs)
-Espero que te sirva como guía de aprendizaje y pueda ayudarte al máximo para que te abra las puertas a nuevas oportunidades como desarrollador de Rust Embedded🦀.
-</p>
+
+Bienvenido a todos, Rust se ha convertido en una solución para diversos sectores del desarrollo de software y la tecnología, en especial para los sistemas embebidos, esta es una prueba del simulador Wokwi usando el ESP32-S3 con un display ILI9341 conectado por SPI, es una aplicacion bare metal no-std, para más detalle visita [Rust on ESP Community](https://github.com/esp-rs). Espero que te sirva como guía de aprendizaje y pueda ayudarte al máximo para que te abra las puertas a nuevas oportunidades como desarrollador de Rust Embedded🦀.
+
 
 <hr>
 

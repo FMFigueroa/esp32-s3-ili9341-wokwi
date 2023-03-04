@@ -1,5 +1,16 @@
 # ESP32-S3 + Display TFT ili9341 + Wokwi Simulator
 
+<p align="center">
+<img  src="https://res.cloudinary.com/rustlatamgroup/image/upload/v1677900599/Rust%20Embedded/02%20display/02_eb4y0z.png">
+</p>
+
+<hr/>
+<p align="justify">
+Bienvenido a todos, Rust se ha convertido en una solución para diversos sectores del desarrollo de software y la tecnología, en especial para los sistemas embebidos, esta es una prueba del simulador Wokwi usando el ESP32-S3 con un display ILI9341 conectado por SPI, es una aplicacion bare metal no-std, para más detalle visita [Rust on ESP Community](https://github.com/esp-rs/). Espero que te sirva como guía de aprendizaje y pueda ayudarte al máximo para que te abra las puertas a nuevas oportunidades como desarrollador de Rust Embedded🦀.
+</p>
+
+<hr>
+
 ## Dev Containers
 
 This repository offers Dev Containers supports for:
@@ -130,3 +141,24 @@ Wokwi offers debugging with GDB.
   4. Choose the proper user:
      - `esp` when using VS Code or GitHub Codespaces
      - `gitpod` when using Gitpod
+
+## Curso de Rust
+
+<p align="center">
+<img  src="https://res.cloudinary.com/lenobit/image/upload/v1669142817/Rust%20Essential%20Training/assets/banner-github_k63n9t.png">
+</p>
+
+<hr/>
+<p align="justify">
+Bienvenido a todos, aquí aprenderás a programar en Rust desde cero en español, entre lecciones paso a paso, irás adquiriendo los fundamentos y habilidades necesarias para que puedas programar en este excepcional lenguaje, el código ejemplo te dará una mejor comprensión de los conocimentos adquiridos en cada lección, Rust se caracteriza por La velocidad, la concurrencia y la seguridad en la programación de sistemas. Sin embargo, Rust se ha convertido en una solución para diversos sectores del desarrollo de software y la tecnología, espero que esta guía de aprendizaje pueda ayudarte al máximo y te abra las puertas a nuevas oportunidades como desarrollador de Rust 🦀.
+</p>
+
+<hr>
+
+![Typing Animation Displays My Roles](https://readme-typing-svg.herokuapp.com?color=%503385ff&lines=Hola,+Bienvenido+a+Rust+Latam..!;Tenemos+una+comunidad+en+Discord;)
+
+[Únete aquí 👇](https://discord.gg/n9Zu4Xmern)
+
+#### <a href="https://discord.gg/n9Zu4Xmern"><img alt="Discord" width="64px" src="https://img.icons8.com/cute-clipart/64/null/discord-logo.png"/></a>
+
+<hr>

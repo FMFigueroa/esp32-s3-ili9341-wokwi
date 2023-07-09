@@ -141,18 +141,4 @@ Wokwi offers debugging with GDB.
      - `esp` when using VS Code or GitHub Codespaces
      - `gitpod` when using Gitpod
 
-## Curso de Rust
-
-<p align="center">
-<img  src="https://res.cloudinary.com/lenobit/image/upload/v1669142817/Rust%20Essential%20Training/assets/banner-github_k63n9t.png">
-</p>
-
-<hr>
-
-![Typing Animation Displays My Roles](https://readme-typing-svg.herokuapp.com?color=%503385ff&lines=Hola,+Bienvenido+a+Rust+Latam..!;Tenemos+una+comunidad+en+Discord;)
-
-[Únete aquí 👇](https://discord.gg/n9Zu4Xmern)
-
-#### <a href="https://discord.gg/n9Zu4Xmern"><img alt="Discord" width="64px" src="https://img.icons8.com/cute-clipart/64/null/discord-logo.png"/></a>
-
 <hr>
